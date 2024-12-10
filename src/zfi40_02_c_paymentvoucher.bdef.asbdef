@@ -1,0 +1,16 @@
+unmanaged implementation in class zbp_fi40_02_c_paymentvoucher unique;
+strict ( 2 ); //Uncomment this line in order to enable strict mode 2. The strict mode has two variants (strict(1), strict(2)) and is prerequisite to be future proof regarding syntax and to be able to release your BO.
+
+define behavior for ZFI40_02_C_PaymentVoucher alias PV//alias <alias_name>
+//late numbering
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+//  create;
+//  update;
+//  delete;
+
+  field ( readonly ) CompanyCode, FiscalYear, PaymentDocument; //LEDGERGLLINEITEM, SOURCELEDGER, LEDGER ;
+static function getPDF external 'getPDF' parameter zfi40_02_I_input result[1] zfi40_02_I_output ;
+}

@@ -1,0 +1,169 @@
+@Metadata.layer: #CUSTOMER
+@UI:
+{
+ headerInfo:
+  {
+    typeName: 'Report',
+    typeNamePlural: 'Accounting Document',
+    title: { type: #STANDARD, value: 'PaymentDocument' }
+  }
+}
+
+annotate view ZFI40_02_C_PaymentVoucher
+    with 
+{
+      @UI.facet: [ { id:          '_ZBKPF',
+                 purpose:         #STANDARD,
+                 type:            #IDENTIFICATION_REFERENCE,
+                 label:           'Info Detail',
+                 position:        10 }
+                ]
+                
+  @Consumption.filter: { mandatory: true, selectionType: #SINGLE, multipleSelections: false } 
+  @Consumption.valueHelpDefinition: [{ entity:{ name:'I_CompanyCode',element: 'CompanyCode' } }]
+  @UI: {  lineItem:       [{ position: 10 },{type: #FOR_ACTION, dataAction: 'printPDFV1', label: 'Print PDF V1', invocationGrouping: #CHANGE_SET }  ],
+          identification: [{ position: 10 }],
+          selectionField: [{ position: 10 } ] } 
+
+  CompanyCode;
+  
+   @Consumption.filter: { mandatory: true, selectionType: #SINGLE,multipleSelections: false, defaultValue: '0L' }
+   @Consumption.valueHelpDefinition: [{ entity:{ name:'I_Ledger',element: 'Ledger' } }]
+  @UI: {  lineItem:       [ { position: 20, label: 'Source Ledger' } ],
+          identification: [ { position: 20} ],
+          selectionField: [ { position: 20 } ] }
+  SourceLedger;
+  
+  @Consumption.filter: {selectionType: #SINGLE, multipleSelections: true, mandatory: true , defaultValue: '2024' } //'
+  @UI: {  lineItem:       [ { position: 30 } ],
+          identification: [ { position: 30 } ],
+          selectionField: [ { position: 30 } ] }
+  FiscalYear;
+
+  @UI: {  lineItem:       [ { position: 40, label: 'Supplier Number' } ],
+          identification: [ { position: 40 } ],
+          selectionField: [ { position: 40 } ] 
+          }
+  Supplier;
+  
+  @UI: {  lineItem:       [ { position: 50, label: 'Supplier Name' }],
+          identification: [ { position: 50 } ] }
+  SupplierFullName;
+  
+  @UI: {  lineItem:       [ { position: 60, label: 'Supplier Address' } ],
+          identification: [ { position: 60 } ] }
+  SupplierAddress;
+
+  @UI: {  lineItem:       [ { position: 70, label: 'Supplier Phone'  } ],
+          identification: [ { position: 70 } ] }
+  SupplierContact;
+
+  @UI: {  lineItem:       [ { position: 80, label: 'Supplier Fax'} ],
+          identification: [ { position: 80 } ]
+        }
+  @EndUserText.label: 'Fax Number'
+  FaxNumber;
+  //@Consumption.filter: { mandatory: true } //, selectionType: #SINGLE,multipleSelections: false
+  //@Consumption.valueHelpDefinition: [{ entity:{ name:'ZFI40_02_C_PaymentVoucher',element: 'PaymentDocument' } }]
+  @UI: {  lineItem:       [ { position: 90, label: 'Payment Document'} ],
+          identification: [ { position: 90 } ]
+          ,
+          selectionField: [ { position: 90 } ]
+          }
+  @EndUserText.label: 'Payment Document'
+  PaymentDocument;
+
+  @UI: {  lineItem:       [ { position: 100, label: 'Payment Document Date' } ],
+          identification: [ { position: 100 } ],
+          selectionField: [ { position: 100 } ] }
+  @EndUserText.label: 'Payment Document Date'
+  PayDocDate;
+  
+  @UI: {  lineItem:       [ { position: 110, label: 'Payment Document Type' } ],
+          identification: [ { position: 110 } ],
+          selectionField: [ { position: 110 } ] }
+  @EndUserText.label: 'Payment Document Type'
+  PayDocType;
+  
+  @UI: {  lineItem:       [ { position: 120, label:'Payment Document Reference' }],
+          identification: [ { position: 120 } ],
+         selectionField: [ { position: 120 } ]
+           }
+  @EndUserText.label: 'Payment Document Reference'
+  PayDocref;
+//  
+//  @UI: {  lineItem:       [ { position: 130 , label:'Payment Amount in Company Code Currency' } ],
+//          identification: [ { position: 130 } ] }
+//  PayAmountComCodeCurr;
+////
+////// @UI: {  lineItem:        [ { position: 140, label: 'Amount LC'} ],
+//////          identification: [ { position: 140 } ] }
+//////  AmountInCompanyCodeCurrency;
+////  
+// @UI: {  lineItem:       [ { position: 150, label: 'Payment Company Code Currency' }],
+//         identification: [ { position: 150 } ]}
+//  PayComCodeCurr;
+
+ @UI: {  lineItem:       [ { position: 160, label: 'House Bank' }],
+          identification:[ { position: 160 } ] }
+  HouseBank;
+  
+ @UI: {  lineItem:        [ { position: 170, label: 'Account ID'  } ],
+          identification: [ { position: 170 } ] }
+  HouseBankAccount;
+
+ @UI: {  lineItem:       [ { position: 180, label: 'Bank G/L Account'} ],
+         identification: [ { position: 180 } ],
+         selectionField: [ { position: 180 } ] }
+ @EndUserText.label: 'Bank G/L Account'
+  GLAccount;
+    
+  @UI: {  lineItem:       [ { position: 190, label: 'G/L Account Description' }],
+          identification: [ { position: 190 } ] }
+  GLAccountLongName;
+  
+//  @UI: {  lineItem:       [ { position: 200, label: 'Invoice Reference' }],
+//          identification: [ { position: 200 } ] }
+//  InvoiceReference;
+//  
+//  @UI: {  lineItem:       [ { position: 210, label: 'Invoice Reference Fiscal Year' }],
+//          identification: [ { position: 210 } ]}
+//  InvoiceReferenceFiscalYear;  
+// 
+//  
+//  @UI: {  lineItem:       [ { position: 230, label: 'Cleared Document Number' }],
+//          identification: [ { position: 230 } ]}
+//  ClearedDocumentNumber;
+//  
+//  @UI: {  lineItem:       [ { position: 240, label: 'Cleared Document Date' }],
+//          identification: [ { position: 240 } ]}
+//  ClearedDocumentDate;
+//  
+//  @UI: {  lineItem:       [ { position: 250, label: 'Cleared Document Type' }],
+//          identification: [ { position: 250 } ]}
+//  ClearedDocumentType;
+//  
+//  @UI: {  lineItem:       [ { position: 260, label: 'Cleared Amount (Tran Cur)' }],
+//          identification: [ { position: 260 } ]}
+//  ClearedAmountTranCur;
+//
+//  @UI: {  lineItem:       [ { position: 270, label: 'Cleared Amount (Cocd Cur)' }],
+//          identification: [ { position: 270 } ]}
+//  ClearedAmountCodCur;
+  
+  @UI: {  lineItem:       [ { position: 280, label: 'Payment document created by' }],
+          identification: [ { position: 280 } ],
+          selectionField: [ { position: 280 } ]}
+  AccountingDocCreatedByUser;
+  
+  @UI: {  lineItem:       [ { position: 290, label: 'User description' }],
+          identification: [ { position: 290 } ]}
+  UserDescription;
+
+//  @UI: {  lineItem:       [ { position: 300, label: 'Cleared Doc Reference' }],
+//          identification: [ { position: 300 } ]
+//          }
+//  ClearedDocumentRef;
+   
+                   
+}

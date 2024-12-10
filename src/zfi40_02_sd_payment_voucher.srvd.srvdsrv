@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service Definition for Payment Voucher'
+define service ZFI40_02_SD_PAYMENT_VOUCHER {
+  expose ZFI40_02_C_PaymentVoucher as PaymentVoucher;
+}
